@@ -1,35 +1,37 @@
 import React from 'react';
 import {
   View,
-  Button,
   Text,
   StyleSheet,
   Image,
   TouchableOpacity,
+  SafeAreaView,
 } from 'react-native';
 
 function ListTrack({item, navigation}) {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity
-        onPress={() =>
-          navigation.navigate('Play', {
-            item,
-          })
-        }>
-        <Image style={styles.img} source={{uri: item.image[0]['#text']}} />
-      </TouchableOpacity>
-      <View style={{alignSelf: 'center'}}>
-        <Text style={styles.textBold}>{item.name}</Text>
-        <Text style={styles.textLight}>{item.artist.name}</Text>
+    <SafeAreaView>
+      <View style={styles.container}>
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate('Play', {
+              item,
+            })
+          }>
+          <Image style={styles.img} source={{uri: item.image[0]['#text']}} />
+        </TouchableOpacity>
+        <View style={{alignSelf: 'center'}}>
+          <Text style={styles.textBold}>{item.name}</Text>
+          <Text style={styles.textLight}>{item.artist.name}</Text>
+        </View>
+        <TouchableOpacity style={styles.play}>
+          <Image
+            style={{alignSelf: 'center'}}
+            source={require('../../../assets/image/play.png')}
+          />
+        </TouchableOpacity>
       </View>
-      <TouchableOpacity style={styles.play}>
-        <Image
-          style={{alignSelf: 'center'}}
-          source={require('../../../assets/image/play.png')}
-        />
-      </TouchableOpacity>
-    </View>
+    </SafeAreaView>
   );
 }
 
