@@ -8,18 +8,20 @@ import {
   TouchableOpacity,
 } from 'react-native';
 
-function ListTrack({navigation}) {
+function ListTrack({item, navigation}) {
   return (
     <View style={styles.container}>
-      <TouchableOpacity onPress={() => navigation.navigate('Play')}>
-        <Image
-          style={styles.img}
-          source={require('../../../assets/image/poster.jpeg')}
-        />
+      <TouchableOpacity
+        onPress={() =>
+          navigation.navigate('Play', {
+            item,
+          })
+        }>
+        <Image style={styles.img} source={{uri: item.image[0]['#text']}} />
       </TouchableOpacity>
       <View style={{alignSelf: 'center'}}>
-        <Text style={styles.textBold}>Dora Nalia</Text>
-        <Text style={styles.textLight}>Maluma</Text>
+        <Text style={styles.textBold}>{item.name}</Text>
+        <Text style={styles.textLight}>{item.artist.name}</Text>
       </View>
       <TouchableOpacity style={styles.play}>
         <Image
@@ -37,7 +39,6 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: '2%',
     padding: '1%',
-
     flexDirection: 'row',
   },
   img: {
@@ -69,7 +70,7 @@ const styles = StyleSheet.create({
     height: 40,
     backgroundColor: '#8C59F7',
     alignSelf: 'center',
-    marginLeft: 170,
     justifyContent: 'center',
+    marginLeft: 'auto',
   },
 });

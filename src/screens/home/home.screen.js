@@ -1,39 +1,35 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {
-  ScrollView,
   View,
   StyleSheet,
   TouchableOpacity,
   Image,
+  FlatList,
 } from 'react-native';
+import musicService from '../../api/music.service';
 import ListTrack from './components/listTrack';
 
 function HomeScreen({navigation}) {
+  const [music, setMusic] = useState([]);
+
+  useEffect(() => {
+    const getMusic = async () => {
+      const music = await musicService.list();
+      setMusic(music);
+    };
+
+    getMusic();
+  }, []);
+
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.heart}>
-        <Image source={require('../../assets/image/heartIcon-selected.png')} />
-      </TouchableOpacity>
-      <ScrollView>
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-        <ListTrack navigation={navigation} />
-      </ScrollView>
+      <FlatList
+        data={music}
+        renderItem={({item}) => (
+          <ListTrack item={item} navigation={navigation} />
+        )}
+        keyExtractor={item => item.mbid}
+      />
     </View>
   );
 }

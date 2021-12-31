@@ -1,7 +1,9 @@
 import React from 'react';
 import {TouchableOpacity, StyleSheet, Text, View, Image} from 'react-native';
 
-function PlayScreen({navigation}) {
+function PlayScreen({route}) {
+  const {item} = route.params;
+
   return (
     <View style={styles.container}>
       <View>
@@ -13,11 +15,17 @@ function PlayScreen({navigation}) {
             />
           </View>
         </View>
-        <Text style={styles.textBold}>Dora Nalia</Text>
-        <Text style={styles.textLight}>Maluma</Text>
+        <Text style={styles.textBold}>{item.name}</Text>
+        <Text style={styles.textLight}>{item.artist.name}</Text>
       </View>
 
-      <View style={{flexDirection: 'row', backgroundColor: 'red'}}>
+      <View
+        style={{
+          flexDirection: 'row',
+          alignItems: 'center',
+          alignSelf: 'center',
+          marginTop: '5%',
+        }}>
         <TouchableOpacity>
           <Image
             style={{height: 30, width: 30}}
@@ -26,7 +34,7 @@ function PlayScreen({navigation}) {
         </TouchableOpacity>
         <TouchableOpacity>
           <Image
-            style={{height: 50, width: 50}}
+            style={{height: 50, width: 50, marginHorizontal: 25}}
             source={require('../../assets/image/playy.png')}
           />
         </TouchableOpacity>
@@ -47,7 +55,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#231E4B',
-    justifyContent: 'space-between',
   },
 
   back1: {
