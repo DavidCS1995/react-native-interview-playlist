@@ -24,7 +24,7 @@ function PlayScreen({route}) {
           flexDirection: 'row',
           alignItems: 'center',
           alignSelf: 'center',
-          marginTop: '5%',
+          marginTop: '50%',
         }}>
         <TouchableOpacity>
           <Image
